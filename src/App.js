@@ -66,7 +66,7 @@ class App extends Component {
     const newCells = this.handleGeneration(cellCopy);
 
     this.setState({ cells: newCells });
-    this.sleep(16);
+    this.sleep(500);
     requestAnimationFrame(() => this.update());
   }
 
@@ -128,7 +128,7 @@ class App extends Component {
 
   toggleButton(running) {
     return (
-      <div className="toggle-button" onClick={this.toggleSimulation}>
+      <div className={`toggle-button ${running? 'stop' : 'start'}`} onClick={this.toggleSimulation}>
         {`${running ? 'Stop': 'Start'} the simulation`}
       </div>
     );

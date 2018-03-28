@@ -36,6 +36,10 @@ body {
   font-size: 1.5rem;
 }
 
+.stop {
+  background-color: #a00;
+}
+
 .toggle-button:hover {
   background-color: #777;
 }
