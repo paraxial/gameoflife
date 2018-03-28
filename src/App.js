@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import './App.css';
+import CellGrid from './CellGrid';
+
+const GRID_SIZE = 32;
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       running: false,
-      introText: 'Okay, start by clicking which cells you want to start off with:',
       cells: this.initialState(),
     }
 
     this.drawCells = this.drawCells.bind(this)
-    this.simulateGenerations = this.simulateGenerations.bind(this)
+    this.update = this.update.bind(this)
     this.toggleSimulation = this.toggleSimulation.bind(this);
-    this.handleClink = this.handleClick.bind(this);
-    this.calculateGeneration = this.calculateGeneration.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.getNeighbourhood = this.getNeighbourhood.bind(this);
+  }
+
+  componentDidMount() {
   }
 
   initialState() {
-    const GRID_SIZE = 32;
     const emptyCells = [];
 
     for(let i = 0; i < GRID_SIZE; i++) {
@@ -34,9 +38,9 @@ class App extends Component {
   }
 
   drawCells() {
-    const { running } = this.state;
+    const { running, cells } = this.state;
 
-    if (running) { return this.simulateGenerations() }
+    return <CellGrid cells={cells} running={running} handleClick={this.handleClick}/>
   }
 
   handleClick(row, column) {
@@ -49,29 +53,82 @@ class App extends Component {
     this.setState({ cells: newCells });
   }
 
-  simulateGenerations() {
-    console.log('TODO');
-    // const { running, cells } = this.state;
-
-    // while(running) {
-    //   this.setState({ cells: this.calculateGeneration(cells) });
-    //   this.drawGrid();
-    // }
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  calculateGeneration(cells) {
-    return cells;
+  update() {
+    const { cells, running } = this.state;
+    if(!running) { return null; }
+
+    const cellCopy = { ...cells };
+
+    const newCells = this.handleGeneration(cellCopy);
+
+    this.setState({ cells: newCells });
+    this.sleep(16);
+    requestAnimationFrame(() => this.update());
+  }
+
+  handleGeneration(cells) {
+    const newCells = [];
+    _.forEach(cells, (row, rowIndex) => {
+      const newRow = [];
+      _.forEach(row, (cell, columnIndex) => {
+        const newCell = this.aliveOrDead(rowIndex, columnIndex, cell, cells);
+        newRow.push(newCell);
+      });
+      newCells.push(newRow);
+    });
+
+    return newCells;
+  }
+
+  aliveOrDead(row, column, signsOfLife, allTheCells) {
+    const neighbours = this.getNeighbourhood(allTheCells, row, column);
+    const numberAlive = _.countBy(neighbours, cell => (cell === true));
+
+    if(signsOfLife && (numberAlive.true === 2 || numberAlive.true === 3)) { return true }
+    if(!signsOfLife && (numberAlive.true === 3)) { return true }
+
+    return false;
+  }
+
+  getNeighbourhood(cells, row, column) {
+    const neighbours = [];
+    const nextRow = Number(row) + 1;
+    const lastRow = Number(row) - 1;
+    const nextColumn = Number(column) + 1;
+    const lastColumn = Number(column) - 1;
+    const neighbourCoordinates = [
+      {row: lastRow, column: lastColumn},
+      {row: lastRow, column: Number(column)},
+      {row: lastRow, column: nextColumn},
+      {row: Number(row), column: lastColumn},
+      {row: Number(row), column: nextColumn},
+      {row: nextRow, column: lastColumn},
+      {row: nextRow, column: Number(column)},
+      {row: nextRow, column: nextColumn},
+    ];
+
+    _.forEach(neighbourCoordinates, (coords) => {
+      if(!coords.row || !coords.column || coords.row < 0 || coords.row >= GRID_SIZE || coords.column < 0 || coords.column >= GRID_SIZE) { return }
+      neighbours.push(cells[coords.row][coords.column]);
+    });
+
+    return neighbours;
   }
 
   toggleSimulation() {
     const { running } = this.state;
 
-    this.setState({ running: !running });
+    const newState = {...this.state, running: !running };
+    this.setState(newState);
   }
 
   toggleButton(running) {
     return (
-      <div onClick={this.toggleSimulation}>
+      <div className="toggle-button" onClick={this.toggleSimulation}>
         {`${running ? 'Stop': 'Start'} the simulation`}
       </div>
     );
@@ -79,85 +136,17 @@ class App extends Component {
 
   render() {
     const { cells, introText, running } = this.state;
+    if (running) { requestAnimationFrame(() => {this.update()}) }
 
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Ah yes, the Game of Life</h1>
+          <h1 className="App-title">Conway's Game of Life</h1>
         </header>
-        <p className="main-text">
-          {introText}
-        </p>
+        {this.drawCells()}
         {this.toggleButton(running)}
-          <CellGrid cells={cells} running={running}/>
       </div>
     );
-  }
-}
-
-class CellGrid extends Component {
-  constructor() {
-    super();
-
-    this.drawGrid = this.drawGrid.bind(this);
-  }
-
-  drawGrid() {
-    const { cells, running } = this.props;
-
-    console.log('going to draw this grid');
-    const cellGrid = [];
-    _.forEach(cells, (row, rowIndex) => {
-      _.forEach(row, (cell, columnIndex) => {
-        cellGrid.push(<Cell
-            running={running}
-            living={cell}
-            row={rowIndex}
-            column={columnIndex}
-            handleClick={this.handleClick}
-            key={`${rowIndex}:${columnIndex}`}
-          />)
-      });
-      cellGrid.push(<br />);
-    });
-
-    return cellGrid;
-  }
-
-  render() {
-    return (
-      <div className="cell-grid">
-        {this.drawGrid()}
-      </div>
-    )
-  }
-}
-
-class Cell extends Component {
-  constructor() {
-    super();
-    this.onClick = this.onClick.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.living === this.props.living) { return false }
-    return true;
-  }
-
-  onClick() {
-    const { living, running, handleClick } = this.props;
-    if (running) { return null; }
-
-    handleClick(!living);
-  }
-
-  render() {
-    const { living } = this.props;
-    const visualClass = living ? 'live' : 'dead';
-
-    return (
-      <div className={`square ${visualClass}`} onClick={this.onClick} />
-    )
   }
 }
 

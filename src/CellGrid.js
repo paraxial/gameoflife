@@ -1,0 +1,46 @@
+import React, { Component } from 'react';
+import _ from 'lodash';
+import Cell from './Cell';
+
+class CellGrid extends Component {
+  constructor() {
+    super();
+
+    this.drawGrid = this.drawGrid.bind(this);
+    this.boundClick = this.boundClick.bind(this);
+  }
+
+  boundClick(row, column) {
+    this.props.handleClick(row, column);
+  }
+
+  drawGrid() {
+    const { cells, running } = this.props;
+
+    const cellGrid = [];
+    _.forEach(cells, (row, rowIndex) => {
+      _.forEach(row, (cell, columnIndex) => {
+        cellGrid.push(<Cell
+            running={running}
+            living={cell}
+            row={rowIndex}
+            column={columnIndex}
+            handleClick={this.boundClick}
+            key={`${rowIndex}:${columnIndex}`}
+          />)
+      });
+    });
+
+    return cellGrid;
+  }
+
+  render() {
+    return (
+      <div className="cell-grid">
+        {this.drawGrid()}
+      </div>
+    )
+  }
+}
+
+export default CellGrid;

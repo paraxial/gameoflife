@@ -4,14 +4,38 @@ body {
   font-family: sans-serif;
 }
 
+.cell-grid {
+  display: flex;
+  width: 62rem;
+  flex-flow: row wrap;
+  margin: 0 auto;
+}
+
 .square {
   display: inline-block;
-  height: 1rem;
-  width: 1rem;
+  height: 1.75rem;
+  width: 1.75rem;
   background-color: #fff;
   border: 1px solid #eee;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
 }
 
 .live {
-  color: #00ff00;
+  background-color: #000;
+}
+
+.toggle-button {
+  padding: 2rem;
+  margin: 2rem;
+  background-color: #000;
+  color: #fff;
+  border-radius: 1rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.toggle-button:hover {
+  background-color: #777;
 }
