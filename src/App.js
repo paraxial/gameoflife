@@ -3,7 +3,8 @@ import _ from 'lodash';
 import './App.css';
 import CellGrid from './CellGrid';
 
-const GRID_SIZE = 32;
+const GRID_SIZE = 25;
+let GENERATION = 0;
 
 class App extends Component {
   constructor() {
@@ -66,8 +67,9 @@ class App extends Component {
     const newCells = this.handleGeneration(cellCopy);
 
     this.setState({ cells: newCells });
-    this.sleep(500);
-    requestAnimationFrame(() => this.update());
+    this.sleep(100).then(() => {
+      requestAnimationFrame(() => this.update());
+    });
   }
 
   handleGeneration(cells) {
@@ -81,6 +83,7 @@ class App extends Component {
       newCells.push(newRow);
     });
 
+    console.log(GENERATION += 1);
     return newCells;
   }
 
@@ -123,6 +126,7 @@ class App extends Component {
     const { running } = this.state;
 
     const newState = {...this.state, running: !running };
+    if(!running) { GENERATION = 0 };
     this.setState(newState);
   }
 
@@ -136,7 +140,7 @@ class App extends Component {
 
   render() {
     const { cells, introText, running } = this.state;
-    if (running) { requestAnimationFrame(() => {this.update()}) }
+    if (running && GENERATION === 0) { requestAnimationFrame(() => {this.update()}) }
 
     return (
       <div className="App">

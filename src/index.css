@@ -6,7 +6,7 @@ body {
 
 .cell-grid {
   display: flex;
-  width: 62rem;
+  width: 47rem;
   flex-flow: row wrap;
   margin: 0 auto;
 }
