@@ -21,9 +21,10 @@ class Cell extends Component {
   render() {
     const { living, row, column } = this.props;
     const visualClass = living ? 'live' : 'dead';
+    var background = `rgb(${parseInt(Math.random()*255)},${parseInt(Math.random()*255)},${parseInt(Math.random()*255)})`;
 
     return (
-      <div className={`square ${visualClass}`} onClick={this.onClick.bind(null, {row, column})} />
+      <div className={`square ${visualClass}`} style={ living ? { backgroundColor : background } : {} } onClick={this.onClick.bind(null, {row, column})} />
     )
   }
 }
