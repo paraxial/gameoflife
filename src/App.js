@@ -21,9 +21,6 @@ class App extends Component {
     this.getNeighbourhood = this.getNeighbourhood.bind(this);
   }
 
-  componentDidMount() {
-  }
-
   initialState() {
     const emptyCells = [];
 
@@ -83,7 +80,7 @@ class App extends Component {
       newCells.push(newRow);
     });
 
-    console.log(GENERATION += 1);
+    GENERATION += 1;
     return newCells;
   }
 
@@ -139,7 +136,7 @@ class App extends Component {
   }
 
   render() {
-    const { cells, introText, running } = this.state;
+    const { running } = this.state;
     if (running && GENERATION === 0) { requestAnimationFrame(() => {this.update()}) }
 
     return (

@@ -12,6 +12,9 @@ class Cell extends Component {
   }
 
   onClick(coords, event) {
+    // Don't do anything unless left mouse button is down
+    if(event.type !== 'click' && event.buttons !== 1) { return };
+
     const { running, handleClick } = this.props;
     if (running) { return null; }
 
@@ -21,10 +24,15 @@ class Cell extends Component {
   render() {
     const { living, row, column } = this.props;
     const visualClass = living ? 'live' : 'dead';
-    var background = `rgb(${parseInt(Math.random()*255)},${parseInt(Math.random()*255)},${parseInt(Math.random()*255)})`;
+    var background = `rgb(${parseInt(Math.random()*255, 10)},${parseInt(Math.random()*255, 10)},${parseInt(Math.random()*255, 10)})`;
 
     return (
-      <div className={`square ${visualClass}`} style={ living ? { backgroundColor : background } : {} } onClick={this.onClick.bind(null, {row, column})} />
+      <div
+        className={`square ${visualClass}`}
+        style={ living ? { backgroundColor : background } : {} }
+        onMouseOver={this.onClick.bind(null, {row, column})}
+        onClick={this.onClick.bind(null, {row, column})}
+      />
     )
   }
 }
