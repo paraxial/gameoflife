@@ -129,10 +129,14 @@ class App extends Component {
 
   toggleButton(running) {
     return (
-      <div className={`toggle-button ${running? 'stop' : 'start'}`} onClick={this.toggleSimulation}>
+      <div className={`button ${running? 'stop' : 'start'}`} onClick={this.toggleSimulation}>
         {`${running ? 'Stop': 'Start'} the simulation`}
       </div>
     );
+  }
+
+  clearGrid() {
+    this.setState({cells: this.initialState()})
   }
 
   render() {
@@ -145,6 +149,7 @@ class App extends Component {
           <h1 className="App-title">Conway's Game of Life</h1>
         </header>
         {this.toggleButton(running)}
+        <div className="button" onClick={this.clearGrid.bind(this)}> Clear Grid</div>
         {this.drawCells()}
         <div className="desc">
           Disclaimer that the behaviour is currently broken around the sides thanks to edge conditions.

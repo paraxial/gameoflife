@@ -48,7 +48,7 @@ body {
   background-color: #000;
 }
 
-.toggle-button {
+.button {
   padding: 2rem;
   margin: 2rem;
   background-color: #000;
@@ -57,6 +57,7 @@ body {
   font-weight: 800;
   font-size: 1.5rem;
 }
+
 
 .stop {
   background-color: #a00;
