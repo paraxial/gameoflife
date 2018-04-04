@@ -13,11 +13,76 @@
   font-size: 1.5em;
 }
 
-.App-intro {
-  font-size: large;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.cell-grid {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.square {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  transition: all linear 0.1s;
+}
+
+
+.square.dead:hover {
+  background-color:#eeeeee;
+  transition: all linear 0.1s;
+}
+
+.live {
+  background-color: #000;
+}
+
+.toggle-button {
+  padding: 2rem;
+  margin: 2rem;
+  background-color: #000;
+  color: #fff;
+  border-radius: 1rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.stop {
+  background-color: #a00;
+}
+
+.toggle-button:hover {
+  background-color: #777;
+}
+
+.stop:hover {
+  background-color: #c00;
+}
+
+.thin-break {
+  display: block;
+  line-height: 0;
+  margin: 0;
+  content: '';
+}
+
+.row {
+  margin: 0;
+  display: flex;
+}
+
+.desc {
+  margin: 1rem;
+  font-size: 0.75rem;
 }

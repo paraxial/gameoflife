@@ -149,10 +149,12 @@ class App extends Component {
         </header>
         {this.toggleButton(running)}
         {this.drawCells()}
-        <div>
+        <div className="desc">
           Disclaimer that the behaviour is currently broken around the sides thanks to edge conditions.
           <br />
           This was built just for ease of demonstration and may only possibly be improved at a later date.
+          <br />
+          Para O'Kelly built the demonstration framework and Alice McCullagh made aesthetic/usability improvements.
         </div>
       </div>
     );
