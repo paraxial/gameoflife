@@ -3,7 +3,7 @@ import _ from 'lodash';
 import './App.css';
 import CellGrid from './CellGrid';
 
-const GRID_SIZE = 25;
+const GRID_SIZE = 50;
 let GENERATION = 0;
 
 class App extends Component {
@@ -147,8 +147,8 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Conway's Game of Life</h1>
         </header>
-        {this.drawCells()}
         {this.toggleButton(running)}
+        {this.drawCells()}
       </div>
     );
   }

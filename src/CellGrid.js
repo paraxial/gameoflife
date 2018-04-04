@@ -19,16 +19,20 @@ class CellGrid extends Component {
 
     const cellGrid = [];
     _.forEach(cells, (row, rowIndex) => {
+      const rowList = [];
+
       _.forEach(row, (cell, columnIndex) => {
-        cellGrid.push(<Cell
+        rowList.push(<Cell
             running={running}
             living={cell}
             row={rowIndex}
             column={columnIndex}
             handleClick={this.boundClick}
             key={`${rowIndex}:${columnIndex}`}
-          />)
+          />);
       });
+
+      cellGrid.push(<div className="row">{rowList}</div>);
     });
 
     return cellGrid;

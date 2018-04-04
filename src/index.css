@@ -6,15 +6,15 @@ body {
 
 .cell-grid {
   display: flex;
-  width: 47rem;
   flex-flow: row wrap;
   margin: 0 auto;
+  justify-content: center;
 }
 
 .square {
   display: inline-block;
-  height: 1.75rem;
-  width: 1.75rem;
+  height: 1rem;
+  width: 1rem;
   background-color: #fff;
   border: 1px solid #eee;
   padding: 0;
@@ -42,4 +42,16 @@ body {
 
 .toggle-button:hover {
   background-color: #777;
+}
+
+.thin-break {
+  display: block;
+  line-height: 0;
+  margin: 0;
+  content: '';
+}
+
+.row {
+  margin: 0;
+  display: flex;
 }
