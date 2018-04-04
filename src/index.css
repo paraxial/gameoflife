@@ -44,6 +44,10 @@ body {
   background-color: #777;
 }
 
+.stop:hover {
+  background-color: #c00;
+}
+
 .thin-break {
   display: block;
   line-height: 0;
