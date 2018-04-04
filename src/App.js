@@ -12,6 +12,8 @@ class App extends Component {
     this.state = {
       running: false,
       cells: this.initialState(),
+      density: 0.2,
+      speed: 100
     }
 
     this.drawCells = this.drawCells.bind(this)
@@ -64,7 +66,7 @@ class App extends Component {
     const newCells = this.handleGeneration(cellCopy);
 
     this.setState({ cells: newCells });
-    this.sleep(100).then(() => {
+    this.sleep(this.state.speed).then(() => {
       requestAnimationFrame(() => this.update());
     });
   }
@@ -139,6 +141,34 @@ class App extends Component {
     this.setState({cells: this.initialState()})
   }
 
+  randomGrid() {
+
+    const cells = [];
+
+    for(let i = 0; i < GRID_SIZE; i++) {
+      const row = [];
+      for(let j = 0; j < GRID_SIZE; j++) {
+        row.push((Math.random() > this.state.density ? false : true));
+      }
+      cells.push(row);
+    }
+
+    this.setState({cells: cells});
+
+
+
+
+  }
+
+  density(event) {
+    this.setState({density: event.target.value});
+    this.randomGrid();
+  }
+
+  updateSpeed(event) {
+    this.setState({speed: 1000-event.target.value});
+  }
+
   render() {
     const { running } = this.state;
     if (running && GENERATION === 0) { requestAnimationFrame(() => {this.update()}) }
@@ -148,8 +178,17 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Conway's Game of Life</h1>
         </header>
-        {this.toggleButton(running)}
-        <div className="button" onClick={this.clearGrid.bind(this)}> Clear Grid</div>
+        <div className="row">
+          {this.toggleButton(running)}
+          <div className="button" onClick={this.clearGrid.bind(this)}>Clear Grid</div>
+          <div className="button" onClick={this.randomGrid.bind(this)}>Randomize Grid</div>
+
+        </div>
+        <div className="row">
+          <input type="range" min="0.05" max="0.95" step="0.1" onChange={this.density.bind(this)}/>
+          <input type="range" min="20" max="1000" step="10" onChange={this.updateSpeed.bind(this)}/>
+        </div>
+
         {this.drawCells()}
         <div className="desc">
           Disclaimer that the behaviour is currently broken around the sides thanks to edge conditions.
@@ -158,6 +197,7 @@ class App extends Component {
           <br />
           Para O'Kelly built the demonstration framework and Alice McCullagh made aesthetic/usability improvements.
         </div>
+
       </div>
     );
   }

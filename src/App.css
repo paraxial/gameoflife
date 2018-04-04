@@ -56,14 +56,20 @@ body {
   border-radius: 1rem;
   font-weight: 800;
   font-size: 1.5rem;
+  width:100;
 }
+
+.row {
+  display: flex;
+}
+
 
 
 .stop {
   background-color: #a00;
 }
 
-.toggle-button:hover {
+.button:hover {
   background-color: #777;
 }
 
