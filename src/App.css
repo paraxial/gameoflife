@@ -31,6 +31,12 @@ body {
   justify-content: center;
 }
 
+.slider-wrapper {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
 .square {
   display: inline-block;
   height: 1rem;
@@ -43,11 +49,9 @@ body {
   transition: all linear 0.1s;
 }
 
-
 .square.dead:hover {
-  background-color:#eeeeee;
+  background-color: #eee;
   transition: all linear 0.1s;
-
 }
 
 .live {

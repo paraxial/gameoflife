@@ -142,7 +142,6 @@ class App extends Component {
   }
 
   randomGrid() {
-
     const cells = [];
 
     for(let i = 0; i < GRID_SIZE; i++) {
@@ -154,10 +153,6 @@ class App extends Component {
     }
 
     this.setState({cells: cells});
-
-
-
-
   }
 
   density(event) {
@@ -185,8 +180,19 @@ class App extends Component {
 
         </div>
         <div className="row">
-          <input type="range" min="0.05" max="0.95" step="0.1" onChange={this.density.bind(this)}/>
-          <input type="range" min="20" max="1000" step="10" onChange={this.updateSpeed.bind(this)}/>
+          <div className="slider-wrapper">
+            <label htmlFor="density-slider">
+              Random cell density slider
+            </label>
+            <input id="density-slider" type="range" min="0.05" max="0.95" step="0.1" onChange={this.density.bind(this)}/>
+          </div>
+
+          <div className="slider-wrapper">
+            <label htmlFor="speed-slider">
+              Generation speed slider
+            </label>
+            <input id="speed-slider" type="range" min="20" max="1000" step="10" onChange={this.updateSpeed.bind(this)}/>
+          </div>
         </div>
 
         {this.drawCells()}
