@@ -26,9 +26,13 @@ body {
   justify-content: center;
 }
 
+.row {
+  display: flex;
+  justify-content: center;
+}
+
 .square {
   display: inline-block;
-
   height: 1rem;
   width: 1rem;
   background-color: #fff;
@@ -63,12 +67,6 @@ body {
   font-size: 1.5rem;
   width:100;
 }
-
-.row {
-  display: flex;
-}
-
-
 
 .stop {
   background-color: #a00;

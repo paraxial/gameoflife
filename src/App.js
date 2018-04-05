@@ -3,7 +3,7 @@ import _ from 'lodash';
 import './App.css';
 import CellGrid from './CellGrid';
 
-const GRID_SIZE = 30;
+const GRID_SIZE = 50;
 let GENERATION = 0;
 
 class App extends Component {
@@ -195,9 +195,8 @@ class App extends Component {
           <br />
           This was built just for ease of demonstration and may only possibly be improved at a later date.
           <br />
-          Para O'Kelly built the demonstration framework and Alice McCullagh made aesthetic/usability improvements.
+          Para O'Kelly built the demonstration framework and Alice McCullagh made large aesthetic/usability improvements.
         </div>
-
       </div>
     );
   }
