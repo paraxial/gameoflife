@@ -173,8 +173,16 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Conway's Game of Life</h1>
         </header>
+        <div className="panel">
+          <div className="row">
+            {this.toggleButton(running)}
+          </div>
+
+          {this.drawCells()}
+
+
         <div className="row">
-          {this.toggleButton(running)}
+
           <div className="button" onClick={this.clearGrid.bind(this)}>Clear Grid</div>
           <div className="button" onClick={this.randomGrid.bind(this)}>Randomize Grid</div>
 
@@ -195,13 +203,13 @@ class App extends Component {
           </div>
         </div>
 
-        {this.drawCells()}
         <div className="desc">
           Disclaimer that the behaviour is currently broken around the sides thanks to edge conditions.
           <br />
           This was built just for ease of demonstration and may only possibly be improved at a later date.
           <br />
           Para O'Kelly built the demonstration framework and Alice McCullagh made large aesthetic/usability improvements.
+        </div>
         </div>
       </div>
     );

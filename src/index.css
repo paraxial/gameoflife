@@ -1,18 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: #222;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -22,53 +7,53 @@ body {
 .cell-grid {
   display: flex;
   flex-flow: column;
-  margin: 0 1rem;
+  margin: 0 auto;
   justify-content: center;
-  background-color:white;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-}
-
-.slider-wrapper {
-  margin: 1rem;
-  display: flex;
-  flex-direction: column;
 }
 
 .square {
   display: inline-block;
-  height: 15px;
-  width:15px;
-  box-sizing:border-box;
+
+  height: 0.4rem;
+  width: 0.4rem;
   background-color: #fff;
   border: 1px solid #eee;
-  margin: 0;
+  padding: 0;
+  margin: 0.3rem;
   border-radius: 1rem;
   transition: all linear 0.1s;
 }
 
+
 .square.dead:hover {
-  background-color: #eee;
+  background-color:#eeeeee;
   transition: all linear 0.1s;
+
 }
 
 .live {
   background-color: #000;
-
+  margin:0;
+  height: 1rem;
+  width: 1rem;
 }
 
 .button {
-  padding: 1rem;
+  padding: 2rem;
+  margin: 2rem;
   background-color: #000;
   color: #fff;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   font-weight: 800;
   font-size: 1.5rem;
-  width:100%;
+  width:100;
 }
+
+.row {
+  display: flex;
+}
+
+
 
 .stop {
   background-color: #a00;
@@ -90,17 +75,6 @@ body {
 }
 
 .row {
+  margin: 0;
   display: flex;
-}
-
-.desc {
-  margin: 1rem;
-  font-size: 0.75rem;
-}
-
-.panel {
-  width: 800px;
-  margin: 0 auto;
-  background-color: lightgrey;
-
 }
