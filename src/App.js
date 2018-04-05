@@ -3,7 +3,7 @@ import _ from 'lodash';
 import './App.css';
 import CellGrid from './CellGrid';
 
-const GRID_SIZE = 50;
+const GRID_SIZE = 30;
 let GENERATION = 0;
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
       running: false,
       cells: this.initialState(),
       density: 0.2,
-      speed: 100
+      speed: 200
     }
 
     this.drawCells = this.drawCells.bind(this)
