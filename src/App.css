@@ -22,7 +22,6 @@ body {
 .cell-grid {
   display: flex;
   flex-flow: column;
-  margin: 0 1rem;
   justify-content: center;
   background-color:white;
 }
