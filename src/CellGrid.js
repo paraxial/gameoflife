@@ -32,7 +32,7 @@ class CellGrid extends Component {
           />);
       });
 
-      cellGrid.push(<div className="row">{rowList}</div>);
+      cellGrid.push(<div className="row" key={rowIndex}>{rowList}</div>);
     });
 
     return cellGrid;
